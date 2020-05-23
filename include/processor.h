@@ -7,7 +7,7 @@
 class Processor {
  public:
   float Utilization();  // TODO: See src/processor.cpp
-  float SetCpuFields(std::vector<std::string>);
+  void SetCpuFields(std::vector<std::string>);
   void change_prev_to_current();
 
   // TODO: Declare any necessary private members

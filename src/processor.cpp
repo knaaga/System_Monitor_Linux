@@ -25,7 +25,7 @@ float Processor::Utilization()
     return cpu_utilization;  
 }
 
-float Processor::SetCpuFields(std::vector<std::string> cpu_fields_string)
+void Processor::SetCpuFields(std::vector<std::string> cpu_fields_string)
 {
     user = std::stod(cpu_fields_string[1]);
     nice = std::stod(cpu_fields_string[2]);
