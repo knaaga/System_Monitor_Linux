@@ -20,8 +20,6 @@ Processor& System::Cpu()
 { 
     std::vector<std::string> cpu_fields_string = LinuxParser::CpuUtilization();
     cpu.SetCpuFields(cpu_fields_string);
-    //cpu.Utilization();
-
     return cpu;
 }
 
@@ -35,7 +33,10 @@ std::string System::Kernel()
 }
 
 // TODO: Return the system's memory utilization
-float System::MemoryUtilization() { return 0.0; }
+float System::MemoryUtilization() 
+{
+    return LinuxParser::MemoryUtilization(); 
+}
 
 // TODO: Return the operating system name
 std::string System::OperatingSystem() 
