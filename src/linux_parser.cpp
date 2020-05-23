@@ -35,15 +35,15 @@ string LinuxParser::OperatingSystem() {
 
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::Kernel() {
-  string os, kernel;
+  string os, kernel, version;
   string line;
   std::ifstream stream(kProcDirectory + kVersionFilename);
   if (stream.is_open()) {
     std::getline(stream, line);
     std::istringstream linestream(line);
-    linestream >> os >> kernel;
+    linestream >> os >> version >> kernel;
   }
-  return kernel;
+  return (version + " " + kernel);
 }
 
 // BONUS: Update this to use std::filesystem
@@ -98,7 +98,29 @@ long LinuxParser::ActiveJiffies() { return 0; }
 long LinuxParser::IdleJiffies() { return 0; }
 
 // TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() { return {}; }
+std::vector<std::string> LinuxParser::CpuUtilization() 
+{
+  std::ifstream filestream(kProcDirectory + kStatFilename);
+  string line;
+  string key_word = "cpu "; //note the space
+  string field;
+  std::vector<std::string> cpu_fields_string;
+  if (filestream.is_open())
+  {
+    while(std::getline(filestream, line))
+    {
+      if(line.find(key_word) != string::npos)
+      {
+        std::istringstream linestream(line);
+        while(linestream>>field)
+        {
+          cpu_fields_string.push_back(field);
+        }          
+      }
+    }
+  }
+  return cpu_fields_string; 
+}
 
 // TODO: Read and return the total number of processes
 int LinuxParser::TotalProcesses() 
