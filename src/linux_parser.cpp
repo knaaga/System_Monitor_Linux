@@ -71,7 +71,7 @@ vector<int> LinuxParser::Pids() {
 float LinuxParser::MemoryUtilization() 
 {
   vector<string> key_words {"MemTotal", "MemFree", "Buffers"};
-  double MemUtil, MemTotal, MemFree, Buffers;
+  double MemUtil, MemTotal, MemFree;
   vector<string> memtype, memory, unit;
   string line;
   std::ifstream filestream(kProcDirectory + kMeminfoFilename);
@@ -79,7 +79,7 @@ float LinuxParser::MemoryUtilization()
   {
     while(std::getline(filestream, line))
     {
-      for (int i = 0 ; i < key_words.size(); i++)
+      for (size_t i = 0 ; i < key_words.size(); i++)
       {
         if (line.find(key_words[i]) != string::npos)
         {
@@ -95,7 +95,6 @@ float LinuxParser::MemoryUtilization()
   }
   MemTotal = std::stod(memory[0]);
   MemFree = std::stod(memory[1]);
-  Buffers = std::stod(memory[2]);
 
   MemUtil = 1 - MemFree/(MemTotal);
 
