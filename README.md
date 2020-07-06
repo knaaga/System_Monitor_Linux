@@ -1,7 +1,5 @@
 # Linux System Monitor
 
-An htop style system resource monitor for Linux. Built using the ncurses graphic library. Implements C++ object oriented programming concepts such as inheritance and polymorphism
-
 <img src="monitor.JPG" width="717" height="393" />
 
 ## ncurses
